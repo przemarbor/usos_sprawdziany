@@ -1,0 +1,8 @@
+*.tex
+\#*\#
+.\#*
+*~
+auto/
+aux/
+sprUSOS-src/
+_minted-*

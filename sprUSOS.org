@@ -1,0 +1,365 @@
+#+TITLE: Moduł ''Sprawdziany'' w USOS - automatyzacja oceniania
+#+AUTHOR: MB
+#+LANGUAGE: pl
+#+OPTIONS: H:2 toc:nil num:t
+#+STARTUP: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation]
+#+BEAMER_THEME: AnnArbor
+# # AnnArbor Copenhagen Darmstadt Madrid Warsaw Singapore Pittsburgh
+# #+BEAMER_COLOR_THEME: seahorse wolverine default    <- KONTRASTOWE
+#+BEAMER_COLOR_THEME: spruce
+
+#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col)
+
+#+LATEX_HEADER: \renewcommand*{\contentsname}{Spis treści}
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame} \frametitle{\contentsname}  \tableofcontents[currentsection]  \end{frame}}
+
+#+LATEX_HEADER: \definecolor{mygreen}{rgb}{0.3, 0.6, 0.2}
+#+LATEX_HEADER: \hypersetup{
+#+LATEX_HEADER:     colorlinks=true,
+#+LATEX_HEADER:     linkcolor=mygreen,
+#+LATEX_HEADER:     filecolor=magenta,      
+#+LATEX_HEADER:     urlcolor=olive,
+#+LATEX_HEADER:     }
+
+
+#+LATEX_HEADER: \newcommand{\itemTab}{0.3cm}
+#+LATEX_HEADER: \usepackage{enumitem}
+#+LATEX_HEADER: \setlistdepth{10}
+#+LATEX_HEADER: \setlist[itemize,1]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,2]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,3]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,4]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,5]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,6]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,7]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,8]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,9]{leftmargin=\itemTab}
+#+LATEX_HEADER: \setlist[itemize,10]{leftmargin=\itemTab}
+#+LATEX_HEADER: \renewlist{itemize}{itemize}{10}
+#+LATEX_HEADER: \setlist[itemize]{label=\textbullet}
+
+
+# * Wstęp
+# ** Czym jest Zotero
+# *** Thanks to Eric Fraga                                           :B_block:
+#     :PROPERTIES:
+#     :BEAMER_COL: 0.48
+#     :BEAMER_ENV: block
+#     :END:
+#     for the first viable Beamer setup in Org
+# *** Thanks to everyone else                                        :B_block:
+#     :PROPERTIES:
+#     :BEAMER_COL: 0.48
+#     :BEAMER_ACT: <2->
+#     :BEAMER_ENV: block
+#     :END:
+#     for contributing to the discussion
+# **** This will be formatted as a beamer note                       :B_note:
+#      :PROPERTIES:
+#      :BEAMER_env: note
+#      :END:
+# ** Frame 2 (where we will not use columns)
+# *** Request
+#     Please test this stuff!
+
+
+* Motywacja
+** Po co stosować system automatycznego oceniania i publikacji ocen w USOS
+
+*** Kiedy niepotrzebny?
+- Jedna ocena na koniec semestru 
+
+** Po co stosować system automatycznego oceniania i publikacji ocen w USOS
+*** 
+- łatwość udostępniania ocen studentom
+- łatwa anonimizacja danych
+- automatyczna archiwizacja (dostęp do ocen z poprzednich lat)
+- dostęp do statystyk
+  
+- wymiana ocen pomiędzy nauczycielami prowadzącymi ten sam przedmiot
+- integracja z "Protokołami"
+- oszczędność czasu przy ocenianiu (automatyzacja procesu oceniania)
+- *oszczędność czasu* (minusy: logowanie, utrzymywanie wersji papierowej?)
+
+
+* Gdzie
+** 
+*** 
+- [[https://usos.prz.edu.pl]]
+  - Zakładka =Dla pracowników=
+  - Kafelek  =Sprawdziany=
+
+Bezpośredni link: [[https://usos.prz.edu.pl/kontroler.php?_action=dla_prac/sprawdziany/index]]
+
+* Tworzenie nowego zestawu zasad oceniania dla przedmiotu
+
+** 
+ 
+*** Wykorzystanie szablonu
+- =Sprawdziany=
+  - =Nowy zestaw zasad=
+    - =Brak szablonu=
+      - Wybieramy odpowiedni szablon
+        - Szablony własne (prawa strona okna) i publiczne ([[https://usos.prz.edu.pl/kontroler.php?_action=dla_prac/sprawdziany/katalogSzablonow][link]])
+
+*** Tworzenie "od podstaw"
+- =Sprawdziany=
+  - =Nowy zestaw zasad=
+    - =Brak szablonu=      
+      - =Stwórz i przejdź do edycji=
+      
+
+# - Typy ocen
+#   - stringi
+#   - UWAGA (!) przy pisaniu skryptów: brak jednolitego nazewnictwa dla tych
+#     samych ocen!!!
+
+
+** Wystawianie ocen
+
+*** Tworzenie struktury: dodawanie węzłów (m.in. ocen)
+- =Sprawdziany=
+  - =przejdź do=
+    - =widok struktury=
+      - =dodaj element=
+	-
+	-
+	- nowa ocena
+	  - Wybierz typ oceny. Ocena to =string=.
+	    UWAGA (!!!) na różne stringi dla tej samej oceny
+	    przy różnych skalach ocen, np:
+	    + =3 (dst)= vs =3,0 (dst)=, lub
+	    + =3,5 (dst+)= vs =3,5 (+dst)=
+
+- automatyzacja oceniania
+
+
+
+* Funkcjonalności
+:PROPERTIES:
+:PRJ-DIR: ./sprUSOS-src/
+:END:
+
+** Udostępnianie ocen studentom (z zachowaniem anonimizacji!)
+
+*** 
+- =Sprawdziany=
+  - =przejdź do=
+    - =widok struktury=
+
+*** 
+
+- ''zielone oczko''
+- mail grupowy z informacją o dostępności ocen
+
+** Dostęp do historycznych ocen (archiwizacja)
+- =Sprawdziany=
+  - =Wybierz rok akademicki=
+
+** Statystyki
+- =Sprawdziany=
+  - =przejdź do=
+    - =widok struktury=
+      - =dane=
+	- =statystyki=
+
+** Udostępnianie ocen innym nauczycielom / Uprawnienia
+*** 
+- =Sprawdziany=
+  - =przejdź do=
+    - =widok struktury=
+      - =węzeł=
+	- =uprawnienia=
+	  
+*** Uwaga! Problem ''spływania'' uprawnień! Cytat z instrukcji:
+- Uwaga: Edycja uprawnień dla korzenia jest jednoznaczna z edycją uprawnień
+  całego zestawu.
+
+- Pola oznaczone =*= można modyfikować tylko w korzeniu. Odnoszą się one zawsze do
+   całego zestawu.
+
+- *UWAGA: Aby można było przyznać komuś prawo zmiany ocen/wyników, ta osoba musi
+  najpierw mieć przyznane prawo odczytu w korzeniu!*
+
+
+** Automatyzacja/algorytmizacja procesu oceniania
+
+*** 
+- =Sprawdziany=
+  - =przejdź do=
+    - =widok struktury=
+      - =węzeł= (przy ocenie, której wystawianie zamierzamy zautomatyzować)
+	- =właściwości=
+	  - =Zależy od:=
+	  - =Automatyczne wystawianie ocen=
+	  -
+	    - [X] =użyj automatycznego oceniania=
+	    - Algorytm
+	    - =Testowanie= -> =Przelicz=
+	    - =Przykłady składni programu=
+	    - =Zapisz=
+
+
+** Automatyzacja/algorytmizacja procesu oceniania
+
+*** Przykładowy skrypt oceniający
+Przypadek: Metody numeryczne:
+- kilku prowadzących (uprawnienia do poszczególnych grup zajęciowych...),
+- 4 formy prowadzonych zajęć w ramach przedmiotu,
+- ocena jako średnia ważona
+
+** 
+# Automatyzacja/algorytmizacja procesu oceniania
+
+#+ATTR_LATEX: :options frame=single, fontsize=\tiny
+#+begin_src python :tangle (concat (org-entry-get nil "PRJ-DIR" t) "skrypt.txt") :mkdirp yes
+# definicja domyslnej oceny w przypadku niezaliczenia przedmiotu
+# (2 albo brak oceny ale skutek ten sam...)
+defNZAL = null  ; # null lub [2,0 (ndst)]
+
+# jesli jedna z ocen składowych to 2 lub
+# gdy ocena nie zostala wpisana (wartosc null) to wystaw defNZAL:
+if (
+labOc === null || 
+proOc === null || 
+cwiOc === null || 
+egzOc === null) 
+{return defNZAL ;}
+
+if (
+labOc == [2,0 (ndst)] || labOc == [2 (ndst)] || 
+proOc == [2,0 (ndst)] || proOc == [2 (ndst)] ||
+cwiOc == [2,0 (ndst)] || cwiOc == [2 (ndst)] || 
+egzOc == [2,0 (ndst)] || egzOc == [2 (ndst)] || egzOc == [NZAL] || egzOc == [NK] ) 
+{return defNZAL;}
+
+# w przeciwnym przypadku ocena jest średnią ocen składowych.. 
+# .. zaokrągloną do wartości zgodnych ze skalą ocen
+
+# definicja wag dla sredniej wazonej (wszystkie wagi = 1.0 daja srednia arytmetyczna)
+wL = 1.2 ;
+wP = 0.8 ;
+wC = 0.8 ;
+wE = 1.2 ;
+#+end_src
+** 
+#+ATTR_LATEX: :options frame=single, fontsize=\tiny
+#+begin_src python :tangle (concat (org-entry-get nil "PRJ-DIR" t) "skrypt.txt") :mkdirp yes
+if (labOc == [3,0 (dst)]  || labOc == [3 (dst)])    {lab = 3.0 ;} 
+if (labOc == [3,5 (+dst)] || labOc == [3,5 (dst+)]) {lab = 3.5 ;} 
+if (labOc == [4,0 (db)]   || labOc == [4 (db)])     {lab = 4.0 ;} 
+if (labOc == [4,5 (+db)]  || labOc == [4,5 (db+)])  {lab = 4.5 ;} 
+if (labOc == [5,0 (bdb)]  || labOc == [5 (bdb)])    {lab = 5.0 ;}
+
+if (proOc == [3,0 (dst)]  || proOc == [3 (dst)])    {pro = 3.0 ;} 
+if (proOc == [3,5 (+dst)] || proOc == [3,5 (dst+)]) {pro = 3.5 ;} 
+if (proOc == [4,0 (db)]   || proOc == [4 (db)])     {pro = 4.0 ;} 
+if (proOc == [4,5 (+db)]  || proOc == [4,5 (db+)])  {pro = 4.5 ;} 
+if (proOc == [5,0 (bdb)]  || proOc == [5 (bdb)])    {pro = 5.0 ;}
+
+if (cwiOc == [3,0 (dst)]  || cwiOc == [3 (dst)])    {cwi = 3.0 ;} 
+if (cwiOc == [3,5 (+dst)] || cwiOc == [3,5 (dst+)]) {cwi = 3.5 ;} 
+if (cwiOc == [4,0 (db)]   || cwiOc == [4 (db)])     {cwi = 4.0 ;} 
+if (cwiOc == [4,5 (+db)]  || cwiOc == [4,5 (db+)])  {cwi = 4.5 ;} 
+if (cwiOc == [5,0 (bdb)]  || cwiOc == [5 (bdb)])    {cwi = 5.0 ;} 
+
+
+if (egzOc == [ZAL]) 
+{
+    # jesli egzamin byl tylko ''zaliczony/niezaliczony'',
+    # ocena to srednia arytemtyczna ocen z pozostalych form zajec
+    srednia = ((lab + pro + cwi)/3) ;
+}
+else
+#+end_src
+
+** 
+#+ATTR_LATEX: :options frame=single, fontsize=\tiny
+#+begin_src python :tangle (concat (org-entry-get nil "PRJ-DIR" t) "skrypt.txt") :mkdirp yes
+{
+    # jesli egzamin byl na ocene to ocena koncowa
+    # to srednia wazona zgodnie z wagami zdefiniowanymi powyzej
+    if (egzOc == [3,0 (dst)]  || egzOc == [3 (dst)])    {egz = 3.0 ;} 
+    if (egzOc == [3,5 (+dst)] || egzOc == [3,5 (dst+)]) {egz = 3.5 ;} 
+    if (egzOc == [4,0 (db)]   || egzOc == [4 (db)])     {egz = 4.0 ;} 
+    if (egzOc == [4,5 (+db)]  || egzOc == [4,5 (db+)])  {egz = 4.5 ;} 
+    if (egzOc == [5,0 (bdb)]  || egzOc == [5 (bdb)])    {egz = 5.0 ;} 
+
+    sredniaWazona = (( wL*lab + wP*pro + wC*cwi + wE*egz)/4) ;
+    # sredniaWazona = (( 1.2*lab + 0.8*pro + 0.8*cwi + 1.2*egz)/4) ;
+    # sredniaWazona = 0.3*lab + 0.2*pro + 0.2*cwi + 0.3*egz ;
+    srednia = sredniaWazona ;
+}
+
+ocena = round(srednia * 2)/2 ;
+
+if (ocena == 3.0) {return [3,0 (dst)]  ;} 
+if (ocena == 3.5) {return [3,5 (+dst)] ;} 
+if (ocena == 4.0) {return [4,0 (db)]   ;} 
+if (ocena == 4.5) {return [4,5 (+db)]  ;} 
+if (ocena == 5.0) {return [5,0 (bdb)]  ;} 
+else {return defNZAL;}
+#+end_src
+
+- testowanie skryptu
+
+- [[https://usos.prz.edu.pl/kontroler.php?_action=dla_prac/sprawdziany/edytuj&callback=g_53ec711a&wez_id=48660][Ten szablon]] w szablonach publicznych
+
+
+# - TODO: wprowadzenie wag, albo "suma-0.01", żeby uniknąć sytuacji, że
+  # 3,3,3 i 4 daje 3.5!
+
+** Integracja z protokołami! Eksport to protokołów
+
+#+begin_export latex
+\scriptsize
+#+end_export
+
+
+*** Wersja 1
+- =Sprawdziany=
+  - =przejdź do=
+    - =widok struktury=
+      - =dane= (przy wybranej ocenie!)
+	- =przepisz do protokołu=
+	  - =Wybierz termin protokołu, do którego chcesz przepisać oceny:=
+	    - =Przepisz oceny=
+	    
+*** Wersja 2
+- =Sprawdziany=
+  - =przejdź do=
+    - =widok struktury=
+      - =oceny= (przy wybranej ocenie!)
+	- =dane=
+	  - =przepisz do protokołu=
+	    - =Wybierz termin protokołu, do którego chcesz przepisać oceny:=
+	      - =Przepisz oceny=
+
+** Przykłady innych skryptów:
+- [[https://usos.prz.edu.pl/kontroler.php?_action=dla_prac/sprawdziany/katalogSzablonow][szablony publiczne]]
+- Algorytmy... (3 oceny w semestrze z jednej formy zajęć -> srednia -> przekazanie ocen koordynatorowi)
+- Matematyka dyskretna i ... (oceny z dwóch form zajęć -> przekazywanie ocen koordynatorowi -> srednia)
+
+
+* Bibliografia  
+** Znalezione w internecie
+
+*** W naszym USOSie:
+https://usos.prz.edu.pl/sprawdziany_cz1.pdf
+
+https://usos.prz.edu.pl/sprawdziany_cz2.pdf
+
+# *** 
+# - https://usosweb.usos.pw.edu.pl/file/sprawdziany.pdf
+
+*** 
+# - https://centrum.uni.opole.pl/wp-content/uploads/2015/07/Sprawdziany-w-USOSweb.pdf
+- Sprawdzanie obecności (https://cos.po.opole.pl/images/usosweb/2020/usosweb-modul-sprawdziany-lista-obecnosci-20200117.pdf)
+  
+* COMMENT Local Variables
+# # 
+# #+Local Variables:
+# #+org-beamer-outline-frame-title: "Spis treści"
+# #+End:
